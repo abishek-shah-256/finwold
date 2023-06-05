@@ -1,0 +1,161 @@
+{%extends 'main.html' %}
+{%load static%}
+
+{% comment %}
+{%block content%}
+
+    <div >
+        
+        <form class="login_form" method ="POST" action ="">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <input type="text" name = "username" placeholder="username">
+            <input type="text" name = "password" placeholder="password">
+            <input type="submit" value="submit">
+            <span>Haven't SignUp yet? </span>
+            <a href = "{%url 'register'%}">Register</a>
+        </form>
+            
+    </div>
+    
+
+
+{%endblock content%}
+{% endcomment %}
+
+{%block content%}
+
+<main>
+
+    <div class="login-container">
+        <div class="forms-container">
+            <div class="signin-signup">
+
+                <form method ="POST" action ="{%url 'login'%}" class="sign-in-form">
+                    {% csrf_token %}
+                    <h2 class="title">Login</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Username"  name="username">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" name="password">
+                    </div>
+                    <input type="submit" value="Login" class="btn solid">
+                    
+                    {% comment %} <p class="social-text">Or Login with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        
+                    </div> {% endcomment %}
+
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li><strong>{{ message }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </form>
+                
+                <form action="{%url 'register'%}" method="POST" class="sign-up-form">
+                    {% csrf_token %}
+
+                    <h2 class="title">Register</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        {% comment %} {{form.username}} {% endcomment %}
+                        <input type="text" placeholder="Username" name="username" maxlength="150" autofocus="" required="" id="id_username">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        {% comment %} {{form.email}} {% endcomment %}
+                        <input type="email" placeholder="Email" name="email" maxlength="254" required="" id="id_email">
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        {% comment %} {{form.password1}} {% endcomment %}
+                        <input type="password" placeholder="Password" name="password1" autocomplete="new-password" required="" id="id_password1" aria-autocomplete="list">
+
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        {% comment %} {{form.password2}} {% endcomment %}
+                        <input type="password" placeholder="Confirm Password" name="password2" autocomplete="new-password" required="" id="id_password2" aria-autocomplete="list">
+
+                    </div>
+        
+                    <input type="submit" value="Sign Up" class="btn solid" >
+                    
+                    {% comment %} <p class="social-text">Or Register with social platforms</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                       
+                    </div> {% endcomment %}
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li><strong>{{ message }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                </form>
+            </div>
+        </div>
+    
+        <div class="panels-container">
+            
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>New here ?</h3>
+                    <p>Register now and take control of your financial future</p>
+                    <button class="btn transparent" id="sign-up-btn">Register</button>
+                </div>
+                <img src="{%static 'images/login/login.svg'%}" alt="" class="login-image">
+            </div>
+    
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Already a User ?</h3>
+                    <p>Good to see you again! Let's manage your finances like a pro</p>
+                    <button class="btn transparent" id="sign-in-btn">Login</button>
+                </div>
+                <img src="{%static 'images/login/register.svg'%}" alt="" class="login-image">
+            </div>
+        </div>
+    
+    </div>
+
+
+</main>
+
+
+<script src="{%static 'js/login_script.js'%}"></script>
+<script src="{%static 'js/script.js'%}"></script>
+<script src="https://kit.fontawesome.com/b04c3b3a62.js" crossorigin="anonymous"></script>
+
+{%endblock content%}

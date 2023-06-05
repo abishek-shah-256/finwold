@@ -1,0 +1,398 @@
+{% extends 'main.html' %}
+{%load static%}
+
+{% comment %} {%block content%}
+
+<div>
+    this is home page
+    <a  href = "{%url 'logi'%}">Login</a>
+</div> 
+<br>
+
+     <!-- Logged In -->
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}">Log Out</a>
+    {%endif%}
+
+
+{%endblock content%} {% endcomment %}
+
+{%block content%}
+
+<main>
+    <article>
+
+        <section class="hero" id="hero">
+            <div class="container">
+
+                <div class="hero-content">
+                    <h1 class="h1 hero-title">Finwold-a one stop solution</h1>
+                    <p class="hero-text">
+                        A stock price predictor and expense tracker
+                    </p>
+                    <p class="form-text">
+                        Welcome to our finance website where we provide a comprehensive suite of tools to help you manage your finances effectively
+                    </p>
+                    {% comment %} <form action="" class="hero-form">
+                        <input type="email" name="email" placeholder="Enter your Email" required id="" class="email-field">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form> {% endcomment %}
+                </div>
+
+                <figure class="hero-banner">
+                    <img src="{%static 'images/logo-no-background.png'%}" alt="banner image">
+                </figure>
+
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about-content">
+
+                    <div class="about-icon">
+                        <ion-icon name="cube"></ion-icon>
+                    </div>
+                    <h2 class="h2 about-title">What are we ?</h2>
+                    <p class="about-text">
+                        We specialize in providing stock price predictions and expense tracking tools to help you manage your finances effectively
+                    {% comment %} <button class="btn btn-outline">Learn More</button> {% endcomment %}
+
+                </div>
+                <ul class="about-list">
+                    <li>
+                        <div class="about-card">
+                            <div class="card-icon">
+                                <ion-icon name="thumbs-up"></ion-icon>
+                            </div>
+                            <h3 class="h3 card-title">Easy To Use</h3>
+                            <p class="card-text">user-friendly and easy to navigate</p>
+                            
+                        </div>
+                    </li>
+                    <li>
+                        <div class="about-card">
+                            <div class="card-icon">
+                                <ion-icon name="trending-up"></ion-icon>
+                            </div>
+                            <h3 class="h3 card-title">Grow your Revenue</h3>
+                            <p class="card-text">uses vast data to ensure our predictions are up-to-date</p>
+
+                        </div>
+                    </li>
+                    <li>
+                        <div class="about-card">
+                            <div class="card-icon">
+                                <ion-icon name="shield-checkmark"></ion-icon>
+                            </div>
+                            <h3 class="h3 card-title">Data Security</h3>
+                            <p class="card-text">We take the security of your financial data seriously</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="about-card">
+                            <div class="card-icon">
+                                <ion-icon name="people"></ion-icon>
+                            </div>
+                            <h3 class="h3 card-title">Customer support</h3>
+                            <p class="card-text">Our dedicated customer support team is available to answer any questions</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="features-intro-content">
+                    <div class="features-icon">
+                        <ion-icon name="cog"></ion-icon>
+                    </div>
+                    <h2 class="h2 section-title">Awesome Features</h2>
+                </div>
+
+                    <p class="section-text">
+                        Whether you're an experienced investor or just starting out, our platform is tailored to meet your needs. With our user-friendly interface and powerful features, managing your finances has never been easier. Sign up today to take control of your financial future
+                    </p>
+                
+                <div class="features-wrapper">
+
+                    <figure class="features-banner">
+                        <img src="{%static 'images/invest1.svg'%}" alt="illustration art">
+                    </figure>
+                    <div class="features-content">
+
+                        <p class="features-content-subtitle">
+                            <ion-icon name="sparkles"></ion-icon>
+                            <span>STOCK PRICE PREDICTION</span>
+                        </p>
+                        <h3 class="features-content-title">
+                            Sophisticated <strong>algorithm</strong> & <strong>machine learning</strong> techniques for <strong>better</strong> prediction
+
+                        </h3>
+                        <p class="features-content-text">
+                            Our stock price prediction tool uses cutting-edge technology to analyze market trends and historical data to provide accurate predictions of stock prices. With our tool, you can make informed investment decisions and stay ahead of the curve
+                        </p>
+
+                        <ul class="features-list">
+
+                            <li class="features-list-item">
+                                <ion-icon name="analytics"></ion-icon>
+                                <p>Analyzes market trends</p>
+                            </li>
+                            <li class="features-list-item">
+                                <ion-icon name="stats-chart"></ion-icon>
+                                <p>Easy-to-understand charts and graphs</p>
+                            </li>
+            
+                          </ul>
+
+                          {% comment %} <div class="btn-group">
+                            <button class="btn btn-primary">Read More</button>
+                            <button class="btn btn-secondary">Buy Now</button>
+                          </div> {% endcomment %}
+
+                    </div>
+                </div>
+
+                <div class="features-wrapper">
+
+                    <figure class="features-banner">
+                        <img src="{%static 'images/8432.svg'%}" alt="illustration art">
+                    </figure>
+        
+                    <div class="features-content">
+        
+                        <p class="features-content-subtitle">
+                            <ion-icon name="sparkles"></ion-icon>
+                            <span>EXPENSE TRACKER</span>
+                        </p>
+        
+                        <h3 class="features-content-title">
+                            <strong>Track</strong> of all your <strong>expenses</strong> in one place
+                        </h3>
+        
+                        <p class="features-content-text">
+                            Our expense tracker is designed to help you keep track of your finances in a simple and efficient way. You can easily monitor your income and expenses, set budgets, and track your progress towards your financial goals
+                        </p>
+        
+                        <ul class="features-list">
+        
+                            <li class="features-list-item">
+                                <ion-icon name="bag-check"></ion-icon>
+                                <p>Set budgets for various categories</p>
+                            </li>
+                            <li class="features-list-item">
+                                <ion-icon name="paw"></ion-icon>
+                                <p>Track your spending to ensure you are sticking to your budget</p>
+                            </li>
+        
+                        </ul>
+        
+                        {% comment %} <div class="btn-group">
+                            <button class="btn btn-primary">Read More</button>
+                            <button class="btn btn-secondary">Buy Now</button>
+                        </div> {% endcomment %}
+        
+                    </div>
+                </div>
+            </div>    
+        </section>
+
+        <section class="features" id="teams">
+            <div class="container">
+                <div class="features-intro-content">
+                    <div class="features-icon">
+                        <ion-icon name="cog"></ion-icon>
+                    </div>
+                    <h2 class="h2 section-title">Our Teams</h2>
+                </div>
+      
+                 <div class="team-container">
+              
+                  <div class="align-team">
+                    <div class="supervisor">
+                      <div class="card">
+                        <div class="content">
+                          <div class="imgBx">
+                            <img src="{%static 'images/kishor.jpg'%}" alt="" class="src">
+                          </div>
+                        
+                          <div class="contentBx">
+                            <h4>Kishor Giri</h4>
+                            <h5>Supervisor</h5>
+                          </div>
+                  
+                        </div>
+                      </div>
+                    </div>'
+                    
+                    <div class="team-member">
+                      <div class="card">
+                        <div class="content">
+                          <div class="imgBx">
+                            <img src="{%static 'images/kamal.jpg'%}" alt="" class="src">
+                          </div>
+                          
+                          <div class="contentBx">
+                            <h4>Kamal majhi</h4>
+                            <h5>Software Developer</h5>
+                          </div>
+                  
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="content">
+                          <div class="imgBx">
+                            <img src="{%static 'images/abishek.jpg'%}" alt="" class="src">
+                          </div>
+                          
+                          <div class="contentBx">
+                            <h4>Abishek shah</h4>
+                            <h5>Software Developer</h5>
+                          </div>
+                  
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div class="content">
+                          <div class="imgBx">
+                            <img src="{%static 'images/bidya.jpg'%}" alt="" class="src">
+                          </div>
+                          
+                          <div class="contentBx">
+                            <h4>Bidya Chaudhary</h4>
+                            <h5>Software Developer</h5>
+                          </div>
+                  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                 </div> 
+
+                    
+        
+                   
+            </div> 
+        </section>
+
+
+        <footer class="footer" id="footer">
+            <div class="footer-top">
+                <div class="container">
+
+                    <div class="footer-brand">
+                        <a href="#" class="logo">
+                            <img src="{%static 'images/logo-no-background.png'%}" alt="finwold logo">
+                        </a>
+                        <p class="footer-text">
+                            we are committed to providing you with the information and tools you need to achieve financial success.
+                        </p>
+                        <ul class="social-list">
+                            <li>
+                                <a href="" class="social-link">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="social-link">
+                                    <ion-icon name="logo-twitter"></ion-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="social-link">
+                                    <ion-icon name="logo-instagram"></ion-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="" class="social-link">
+                                    <ion-icon name="logo-linkedin"></ion-icon>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-link-box">
+                        <ul class="footer-list">
+                            <li>
+                                <p class="footer-item-title">ABOUT US</p>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Works</a>
+                            </li>
+                            {% comment %} <li>
+                                <a href="#" class="footer-link">Stragegy</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Releases</a>
+                            </li>
+                            <li> {% endcomment %}
+                                <a href="#" class="footer-link">Press</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Mission</a>
+                            </li>
+                        </ul>
+                        <ul class="footer-list">
+                            <li>
+                                <p class="footer-item-title">FEATURES</p>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Stock price prediction</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Expense</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Finance</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Features</a>
+                            </li>
+                      
+                        </ul>
+                        <ul class="footer-list">
+                            <li>
+                                <p class="footer-item-title">SUPPORT</p>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Developers</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Support</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Customer Service</a>
+                            </li>
+                            <li>
+                                <a href="#" class="footer-link">Get Started</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="container">
+
+                    <p class="copyright">
+                        &copy;2023  <a>Finwold</a>. All Right Reserved
+                    </p>
+
+                </div>
+            </div>
+        </footer>
+
+
+
+
+
+
+    </article>
+</main>
+
+{%endblock content%}

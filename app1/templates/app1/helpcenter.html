@@ -1,0 +1,159 @@
+{%load static%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finwold - Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="/logo">
+                        <!-- <span class="icon"><img class="logo" src="images/logo-no-background.png" alt=""></span> -->
+                        <!-- <span class="title">Finwold</span> -->
+                    </a>
+                </li>
+                <li >
+                    <a href="{%url 'dashboard'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">dashboard</span></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'news'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">newspaper</span></span>
+                        <span class="title">News</span>
+                    </a>
+                </li>
+                <li >
+                    <a href="{%url 'prediction'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">query_stats</span></span>
+                        <span class="title">Prediction</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'myexpense'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">account_balance_wallet</span></span>
+                        <span class="title">My Expense</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'helpcenter'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">help_center</span></span>
+                        <span class="title">Help Center</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#a" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">settings</span></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">logout</span></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="navbar">
+                <div class="toggle">
+                    <span id="sidebar-btn" class="material-icons-sharp">menu</span>
+                </div>
+                <div class="logo-section">
+                    <!-- <span id="sidebar-btn" class="material-icons-sharp">menu</span> -->
+                    <img class="logo" src="images/logo-no-background.png" alt="">
+                </div>
+                <div class="middle-container">
+                    <div class="search-bar">
+                        <span class="material-icons-sharp">search</span>
+                        <input type="search" placeholder="Search">
+                    </div>
+                </div>
+                <div class="profile-area">
+                    <div class="theme-btn">
+                        <img src="images/moon.png" id="dark-icon" alt="">
+                    </div>
+                    <div class="profile">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">person</span>
+                        </div>
+                        <h5>{{request.user}}</h5>
+                        <div class="expand-more"><span class="material-icons-sharp">expand_more</span>
+                            <ul class="expand-more-items">
+                                <li><a href="#">settings</a></li>
+                                <li><a href="{% url 'logout' %}">logout</a></li>
+                            </ul>
+                        </div>
+                        <span  id="o9" class="material-icons-sharp">circle</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="marquee">
+                <marquee behavior="" scrollamount="10" direction="Left">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis dolore facere quos.</marquee>
+            </div>
+
+            <section class="content">
+
+         
+
+                <div class="content2">
+                    <div class="description-container">
+                        <h1 class="description-title">Help center</h1>
+                        <p class="description-text">The stocks data are live data of NASDAQ stock Exchange of USA. </p>
+                        <p class="description-text">To predict the stocks ticker listed in NASDAQ. please follow the following instructions. </p>
+                        <ul style="margin-top:20px;">
+                            <li>              
+                                <p class="description-text">Click on <strong>Prediction</strong> option on sidebar or <strong>Dashboard</strong> option on sidebar.</p>
+                            </li>
+                            <li>              
+                                <p class="description-text">Select the company on the search bar and press <strong>Enter</strong></p>
+                            </li>
+                            <li>              
+                                <p class="description-text">You will see the 10 days future prediction price of that stocks symbol. </p>
+                            </li>
+                        </ul>    
+                    </div>
+                </div>
+    
+    
+    
+    
+    
+            </section>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+ 
+
+
+
+
+
+    <script src="{%static 'js/dashboard_script2.js'%}"></script>
+
+</body>
+</html>

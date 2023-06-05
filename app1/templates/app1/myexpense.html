@@ -1,0 +1,382 @@
+{%load static%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finwold - Dashboard</title>
+    <link rel="shortcut icon" href="{% static 'images/logo-no-background.png' %}" type="image/svg+xml">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/myexpense_dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/myexpense/css/bootstrap.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    
+</head>
+<body>
+    
+    <div class="excontainer">
+        <div class="exsidebar">
+            <ul>
+                <li>
+                    <a href="/logo">
+                        <!-- <span class="icon"><img class="logo" src="images/logo-no-background.png" alt=""></span> -->
+                        <!-- <span class="title">Finwold</span> -->
+                    </a>
+                </li>
+                <li >
+                    <a href="{%url 'dashboard'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">dashboard</span></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'news'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">newspaper</span></span>
+                        <span class="title">News</span>
+                    </a>
+                </li>
+                <li >
+                    <a href="{%url 'prediction'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">query_stats</span></span>
+                        <span class="title">Prediction</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'myexpense'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">account_balance_wallet</span></span>
+                        <span class="title">My Expense</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'helpcenter'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">help_center</span></span>
+                        <span class="title">Help Center</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#a" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">settings</span></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">logout</span></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="exmain">
+            <div class="exnavbar">
+                <div class="toggle">
+                    <span id="exsidebar-btn" class="material-icons-sharp">menu</span>
+                </div>
+                <div class="logo-section">
+                    <!-- <span id="sidebar-btn" class="material-icons-sharp">menu</span> -->
+                    <img class="logo" src="images/logo-no-background.png" alt="">
+                </div>
+                <div class="middle-container">
+
+                    <div class="search-bar">
+                        <span class="material-icons-sharp">search</span>
+                        <input type="search"  id="searchField" placeholder="Search">
+                    </div>
+
+                </div>
+                <div class="profile-area">
+                    <div class="theme-btn">
+                        <img src="images/moon.png" id="dark-icon" alt="">
+                    </div>
+                    <div class="profile">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">person</span>
+                        </div>
+                        <h5>{{request.user}}</h5>
+                        <div class="expand-more"><span class="material-icons-sharp">expand_more</span>
+                            <ul class="expand-more-items">
+                                <li><a href="#">settings</a></li>
+                                <li><a href="{% url 'logout' %}">logout</a></li>
+                            </ul>
+                        </div>
+                        <span  id="o9" class="material-icons-sharp">circle</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="marquee">
+                <marquee behavior="" scrollamount="12" direction="Left">Every penny you save is a penny closer to your dreams. | &nbsp;&nbsp;&nbsp;Don't let your expenses run wild, take control and let your savings grow. | &nbsp;&nbsp;&nbsp;Expense tracking is not about restricting your spending, it's about empowering yourself to make better financial decisions. | </marquee>
+            </div>
+
+            <section class="excontent">
+
+                <div class="overview">
+                    <h1>Date</h1>
+                    <h4 id="current_date"></h4>
+                </div>
+    
+                <div class="chart">
+                    <canvas id="myChart" width="800" height="400"></canvas>
+                </div>
+
+                <div class="content2">
+
+                    <div class="row align-items-center" style=" font-size: 24px;">
+                        <div class="col-md-9">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                  <li class="breadcrumb-item"><a href="{%url 'myexpense'%}" style="color:#528466;">My Expenses</a></li>
+                                  <li class="breadcrumb-item active" aria-current="page">Home</li>
+                                </ol>
+                            </nav>
+                        </div>  
+                        
+                        <div class="col-md-2" >
+                            <a href="{%url 'addexpense'%}" class="btn btn-primary" style="font-size: 1.8rem ;background-color:#528466;">Add Expense</a>
+                        </div>  
+                    </div>
+
+                </div>
+                {% if messages %}
+                <div class="messages mt-5">
+                    {%for message in messages%}
+                    <div {% if message.tags == 'success'%} class="alert alert-sm alert-success" {% endif %} role="alert">
+                        {{message}}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                <div class="card">
+                    <div class="card-body">
+
+
+
+
+                        <div class="app-table">
+                            <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Amount ($)</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col"></th>
+                                    <!-- <th scope="col"></th> -->
+                                  </tr>
+                                </thead>
+                                <tbody>
+    
+                                {% for expense in page_obj %}
+                                  <tr>
+                                    <th scope="row">{{expense.id}}</th>
+                                    <td>{{expense.amount}}</td>
+                                    <td>{{expense.category}}</td>
+                                    <td>{{expense.description}}</td>
+                                    <td>{{expense.date}}</td>
+                                    <td><a href="{%url 'editexpense' expense.id %}" class="btn btn-secondary">Edit</a></td>
+                                    <td><a href="{%url 'deleteexpense' expense.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+                                  </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                            <div>
+                                Showing page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+                            </div>
+                            
+                            <ul class="pagination align-right float-right mr-auto">
+                                {%if page_obj.has_previous %}
+                                <li {%if page_obj.number == 1%} class="page-item active"{%endif%}><a class="page-link" href="?page=1 ">&laquo; 1</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}} ">Previous</a></li>
+                                {%endif%}
+                                {%if page_obj.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.next_page_number}} ">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}} ">{{page_obj.paginator.num_pages}} &raquo;</a></li>
+                                {%endif%}
+                            </ul>
+                        </div>
+
+                        <div class="noResult" style="display:none;"><h4>No results Found1!!!</h4></div>
+
+                        <div class="tableOutput">
+                            <table class="table table-hover">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Amount ($)</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Date</th>
+        
+                                  </tr>
+                                </thead>
+
+                                <tbody class="table-body">
+
+                                </tbody>
+
+                            </table>
+                            
+                        </div>
+
+                    </div>
+                </div>
+               
+    
+       
+                
+
+            </section>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+ 
+
+
+    <script>
+        // --------------------search ajax js code-----------------------------
+        const searchField = document.querySelector('#searchField');
+        const appTable = document.querySelector('.app-table');
+        const tableOutput = document.querySelector('.tableOutput');
+        const tBody = document.querySelector('.table-body');
+        const noResult = document.querySelector('.noResult');
+        tableOutput.style.display = 'None';
+
+        searchField.addEventListener("keyup", (e) => {
+            const searchValue = e.target.value;
+
+            if(searchValue.trim().length > 0){
+                tBody.innerHTML = ""
+                console.log("searchvalue", searchValue );
+
+                fetch("/search-expense", {
+                    body: JSON.stringify({searchText: searchValue}),
+                    method: "POST",
+                })
+
+                .then((res) => res.json())
+                .then((data) =>{
+                    console.log("data", data)
+
+                appTable.style.display = 'None';
+                tableOutput.style.display = 'block';
+
+
+                if(data.length === 0 ){
+                    noResult.style.display = 'block';
+                    tableOutput.style.display = 'none';
+
+                }
+                else{
+                    noResult.style.display = 'None';
+                    data.forEach(item => {
+                        
+                        tBody.innerHTML += `
+                        <tr>
+                            <th scope="row">${item.id}</th>
+                            <td>${item.amount}</td>
+                            <td>${item.category}</td>
+                            <td>${item.description}</td>
+                            <td>${item.date}</td>
+                        </tr>`;
+
+                    });
+                }
+
+                });
+
+            }
+            else{
+                appTable.style.display = 'block';
+                tableOutput.style.display = 'none';
+                
+            }
+        })
+        // --------------------search ajax js code endss-----------------------------
+
+        // --------------------chart js code starts doughnut chart hai-----------------------------
+        const renderChart = (labels, data) =>{
+
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Last 30 days expenses',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    title:{
+                        display: true,
+                        text: 'Last 30 days expenses per category'
+                    }
+                },
+            });
+
+
+        }
+
+        const getChartData =() =>{
+            fetch("/expense_category_summary").then(res => res.json()).then((results) => {
+                console.log("results", results);
+
+               const category_data = results.expense_category_data;
+               const[labels, data] =[
+                Object.keys(category_data),
+                Object.values(category_data),
+               ];
+                console.log(labels,data)
+
+                renderChart(labels, data);
+            })
+
+        }
+
+        document.onload = getChartData();
+
+    
+    </script>
+
+
+    <script src="{%static 'js/myexpense/expense.js'%}"></script>
+    <script src="{%static 'css/myexpense/js/bootstrap.js'%}"></script>
+
+</body>
+</html>

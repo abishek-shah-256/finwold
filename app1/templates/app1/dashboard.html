@@ -1,0 +1,328 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finwold - Dashboard</title>
+    <link rel="shortcut icon" href="{% static 'images/logo-no-background.png' %}" type="image/svg+xml">
+    <link rel="stylesheet" href="{% static 'css/dashboard_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/prediction_style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="/logo">
+                        <!-- <span class="icon"><img class="logo" src="images/logo-no-background.png" alt=""></span> -->
+                        <!-- <span class="title">Finwold</span> -->
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{%url 'dashboard'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">dashboard</span></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'news'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">newspaper</span></span>
+                        <span class="title">News</span>
+                    </a>
+                </li>
+                <li >
+                    <a href="{%url 'prediction'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">query_stats</span></span>
+                        <span class="title">Prediction</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'myexpense'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">account_balance_wallet</span></span>
+                        <span class="title">My Expense</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{%url 'helpcenter'%}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">help_center</span></span>
+                        <span class="title">Help Center</span>
+                    </a>
+                </li>
+                {% comment %} <li>
+                    <a href="#a" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">settings</span></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li> {% endcomment %}
+                <li>
+                    <a href="{% url 'logout' %}" class="sidebar-link">
+                        <span class="icon"><span class="material-icons-sharp">logout</span></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="navbar">
+                <div class="toggle">
+                    <span id="sidebar-btn" class="material-icons-sharp">menu</span>
+                </div>
+                <div class="logo-section">
+                    <!-- <span id="sidebar-btn" class="material-icons-sharp">menu</span> -->
+                    <img class="logo" src="images/logo-no-background.png" alt="">
+                </div>
+                <div class="middle-container">
+                    <div class="search-bar">
+
+                        <form method="GET" action="{% url 'prediction' %}">
+                            <div class="custom-select">
+                                <select id="my-select" name="tickerId">
+                                    <option value="">Search the symbol...</option>
+                                    {% for results in showName %}
+                                    <option value="{{ results.id}}">{{ results.symbol}} {{results.id}} ({{ results.name}})</option>
+                                    {% endfor %}
+                                </select>
+                                <span class="arrow">&#9662;</span>
+                            </div>
+                            <button type="submit" class="symbol_button"> <span class="material-icons-sharp">search</span></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="profile-area">
+                    <div class="theme-btn">
+                        <img src="images/moon.png" id="dark-icon" alt="">
+                    </div>
+                    <div class="profile">
+                        <div class="profile-photo">
+                            <span class="material-icons-sharp">person</span>
+                        </div>
+                        <h5>{{request.user}}</h5>
+                        <div class="expand-more"><span class="material-icons-sharp">expand_more</span>
+                            <ul class="expand-more-items">
+                                <li><a href="#">settings</a></li>
+                                <li><a href="{% url 'logout' %}">logout</a></li>
+                            </ul>
+                        </div>
+                        <span  id="o9" class="material-icons-sharp">circle</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="marquee">
+                <marquee behavior="" scrollamount="10" direction="Left"></marquee>
+                <!-- TradingView Widget BEGIN -->
+                <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <!-- <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/markets/" rel="noopener" target="_blank"><span class="blue-text">Markets today</span></a> by TradingView</div> -->
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+                {
+                    "symbols": [
+                    {
+                      "proName": "FOREXCOM:SPXUSD",
+                      "title": "S&P 500"
+                    },
+                    {
+                      "proName": "FOREXCOM:NSXUSD",
+                      "title": "US 100"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:TSLA"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:AAPL"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:NVDA"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:NFLX"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:MSFT"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:NIO"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:SHOP"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:T"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:CVNA"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:SPOT"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:NKE"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:ABNB"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:BABA"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:UBER"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:JNJ"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NASDAQ:GOOGL"
+                    },
+                    {
+                      "description": "",
+                      "proName": "NYSE:U"
+                    }
+                  ],
+                "showSymbolLogo": true,
+                "colorTheme": "light",
+                "isTransparent": false,
+                "displayMode": "adaptive",
+                "locale": "en"
+                }
+                    </script>
+                </div>
+                <!-- TradingView Widget END -->
+            </div>
+
+            <section class="content">
+
+                <div class="overview">
+                    <h1>Overview</h1>
+                    <h4 id="current_date"></h4>
+                </div>
+    
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li><strong>{{ message }}</strong></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <div class="chart">
+                                        <!-- TradingView Widget BEGIN -->
+                    <div class="tradingview-widget-container">
+                        <div id="tradingview_ae967"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+                        <script type="text/javascript">
+                        new TradingView.widget(
+                        {
+                        "width": 1200,
+                        "height": 510,
+                        "symbol": "NASDAQ",
+                        {% comment %} "symbol": "NASDAQ:AAPL", {% endcomment %}
+                        "interval": "D",
+                        "timezone": "Etc/UTC",
+                        "theme": "light",
+                        "style": "1",
+                        "locale": "en",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_ae967"
+                    }
+                        );
+                        </script>
+                    </div>
+                <!-- TradingView Widget END -->
+
+                    {{chart_html|safe}}
+                    {% comment %} <canvas id="myChart"></canvas> {% endcomment %}
+                </div>
+
+                <section class="blog" id="blog"> 
+                    <div class="container">
+                        <h2 class="h2 section-title">Market News</h2>
+                        <ul class="blog-list">
+                            {% for n in news %}
+                                <li>
+                                    <div class="blog-card">
+        
+                                        <div class="blog-meta">
+                                            <span>                               
+                                                <ion-icon name="calendar-outline"></ion-icon>
+                                                <time datetime"2023-02-16" >{{ n.date|date }}</time>
+                                            </span>
+                                        </div>
+                                        <h3 class="blog-title">{{ n.title|capfirst }}</h3>                     
+                                        <p class="blog-text">{{ n.description|capfirst|truncatechars:95 }}</p>
+        
+                                        <a href="{% url 'news' %}" class="blog-link-btn">
+                                            <span>Learn More</span>
+                                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endfor %}
+ 
+                        </ul>
+    
+                    </div>
+                </section> 
+
+                <div class="content2">
+                    {% comment %} {{ticker_data}} {% endcomment %}
+                    <div class="description-container">
+                        <h1 class="description-title">Disclaimer</h1>
+                        <p class="description-text">Please note that all investments in financial markets are subject to risk, and there is no guarantee of returns. <strong>Finwold</strong> is not responsible for profit or loss of investors. This is Machine learning based forecasting model. Investors should make their own decisions. It is important to carefully consider your investment goals and risk tolerance before investing. </p>
+                    </div>
+                </div>
+    
+    
+    
+    
+    
+            </section>
+
+
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+ 
+
+
+
+
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script src="{%static 'js/dashboard_script.js'%}"></script>
+    {% comment %} <script src="{%static 'js/dashboard_script2.js'%}"></script> {% endcomment %}
+    <!-- <script src="https://kit.fontawesome.com/b04c3b3a62.js" crossorigin="anonymous"></script> -->
+</body>
+</html>
